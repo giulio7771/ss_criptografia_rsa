@@ -1,17 +1,12 @@
 from Crypto.Cipher import AES
 import rsa
 
-#building the rsa pubkey object
-file = open("chave_privada.pem", "r")
-n = int(file.readline())
-d = int(file.readline())
-file.close()
-
 #problema para criar o objeto chave privada
-privkey = rsa.PrivateKey(n, None, d, None, None)
-#with open('chave_privada.pem', mode='rb') as privatefile:
-#    keydata = privatefile.read()
-#privkey = rsa.PrivateKey.load_pkcs1(keydata)
+#privkey = rsa.PrivateKey(n, None, d, None, None)
+with open('chave_privada.pem', mode='rb') as privatefile:
+    keydata = privatefile.read()
+print(keydata)
+privkey = rsa.PrivateKey.load_pkcs1(keydata, format='PEM')
 
 file = open("chave_aes_cifrada.pem", "r")
 chave_aes_cifrada = file.read().encode('utf8')
